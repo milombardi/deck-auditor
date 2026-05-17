@@ -1,0 +1,21 @@
+# Secrets
+.streamlit/secrets.toml
+.env
+
+# Virtualenv
+venv/
+.venv/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Uploaded decks and generated reports
+*.pptx
+*-audit.md
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
