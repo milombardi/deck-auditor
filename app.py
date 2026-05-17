@@ -125,6 +125,13 @@ st.markdown(
         border: 1px solid #e2e8f0 !important;
         background: #ffffff !important;
     }
+
+    /* Hide "Press Enter to apply" — overlaps the eye icon and is redundant
+       since each input is followed by a visible submit button. */
+    [data-testid="InputInstructions"],
+    [data-testid="stWidgetLabel"] + div [data-testid="InputInstructions"] {
+        display: none !important;
+    }
     .stTextInput input:focus, .stNumberInput input:focus {
         border-color: #2563eb !important;
         box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12) !important;
