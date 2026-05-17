@@ -56,10 +56,25 @@ st.markdown(
         margin: 0 !important;
     }
 
-    /* Inter everywhere. */
-    html, body, [class*="st-"], button, input, textarea, select,
-    .stMarkdown, .stTextInput, .stNumberInput, .stFileUploader, .stButton {
+    /* Inter for the page text. Scope narrowly so we don't override the
+       Material Symbols icon font used by Streamlit's chevrons, drag handles,
+       etc. (overriding that font causes the raw ligature name like
+       "arrow_drop_down" to show through as literal text). */
+    html, body, .stApp,
+    .stApp p, .stApp li, .stApp label, .stApp span:not([class*="material"]):not([data-testid*="Icon"]),
+    .stApp h1, .stApp h2, .stApp h3, .stApp h4, .stApp h5, .stApp h6,
+    .stApp button, .stApp input, .stApp textarea, .stApp select,
+    [data-testid="stMarkdownContainer"] {
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    }
+
+    /* Preserve icon fonts. */
+    [class*="material-symbols"],
+    [class*="material-icons"],
+    [data-testid*="Icon"] svg,
+    [data-testid="stExpanderToggleIcon"],
+    [data-testid="stIconMaterial"] {
+        font-family: 'Material Symbols Rounded', 'Material Icons' !important;
     }
 
     /* Off-white canvas. */
