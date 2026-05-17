@@ -29,10 +29,164 @@ from extractor import extract
 # Page setup
 # ---------------------------------------------------------------------------
 
-st.set_page_config(page_title="Deck Auditor", page_icon="🎯", layout="centered")
+st.set_page_config(
+    page_title="Deck Auditor",
+    page_icon="🎯",
+    layout="centered",
+    menu_items={"Get help": None, "Report a bug": None, "About": None},
+)
 
-st.title("Deck Auditor")
-st.caption("Audits PowerPoint decks for narrative quality, AI voice, density, and clarity.")
+# Hide Streamlit chrome + apply clean theme.
+st.markdown(
+    """
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+    /* Hide everything we can of the Streamlit chrome. */
+    #MainMenu,
+    header[data-testid="stHeader"],
+    footer,
+    .stAppDeployButton,
+    [data-testid="stToolbar"],
+    [data-testid="stStatusWidget"],
+    [data-testid="stDecoration"] {
+        visibility: hidden !important;
+        height: 0 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    /* Inter everywhere. */
+    html, body, [class*="st-"], button, input, textarea, select,
+    .stMarkdown, .stTextInput, .stNumberInput, .stFileUploader, .stButton {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    }
+
+    /* Off-white canvas. */
+    .stApp { background: #fafafa; }
+
+    /* Tighter, more breathable container. */
+    .block-container {
+        padding-top: 3rem !important;
+        padding-bottom: 4rem !important;
+        max-width: 720px !important;
+    }
+
+    /* Hero */
+    .da-hero h1 {
+        font-family: 'Inter', sans-serif !important;
+        font-weight: 800 !important;
+        font-size: 2.75rem !important;
+        line-height: 1.1 !important;
+        letter-spacing: -0.025em;
+        color: #0f172a;
+        margin: 0 0 0.5rem 0 !important;
+    }
+    .da-hero p {
+        color: #64748b;
+        font-size: 1.05rem;
+        line-height: 1.55;
+        margin: 0 0 0 0 !important;
+        max-width: 36rem;
+    }
+
+    /* Thin divider used between major sections. */
+    .da-divider {
+        border: none;
+        border-top: 1px solid #e2e8f0;
+        margin: 2.25rem 0;
+    }
+
+    /* Section subheaders */
+    .stApp h3, .stApp h2 {
+        font-weight: 700 !important;
+        color: #0f172a;
+        letter-spacing: -0.01em;
+    }
+
+    /* Inputs */
+    .stTextInput input, .stNumberInput input, .stFileUploader section {
+        border-radius: 8px !important;
+        border: 1px solid #e2e8f0 !important;
+        background: #ffffff !important;
+    }
+    .stTextInput input:focus, .stNumberInput input:focus {
+        border-color: #2563eb !important;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12) !important;
+    }
+
+    /* Buttons */
+    div.stButton > button, div.stDownloadButton > button {
+        border-radius: 8px !important;
+        padding: 0.55rem 1.4rem !important;
+        font-weight: 600 !important;
+        border: 1px solid transparent !important;
+        transition: all 0.15s ease !important;
+    }
+    div.stButton > button[kind="primary"],
+    div.stDownloadButton > button {
+        background: #2563eb !important;
+        color: #ffffff !important;
+    }
+    div.stButton > button[kind="primary"]:hover:not([disabled]),
+    div.stDownloadButton > button:hover {
+        background: #1d4ed8 !important;
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.22) !important;
+        transform: translateY(-1px);
+    }
+    div.stButton > button[disabled] {
+        background: #e2e8f0 !important;
+        color: #94a3b8 !important;
+    }
+    div.stButton > button:not([kind="primary"]) {
+        background: #ffffff !important;
+        color: #0f172a !important;
+        border: 1px solid #e2e8f0 !important;
+    }
+
+    /* Expanders */
+    .streamlit-expanderHeader, [data-testid="stExpander"] summary {
+        font-weight: 600 !important;
+        color: #0f172a !important;
+    }
+    [data-testid="stExpander"] {
+        border: 1px solid #e2e8f0 !important;
+        border-radius: 10px !important;
+        background: #ffffff !important;
+    }
+
+    /* Metric cards */
+    [data-testid="stMetric"] {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 0.75rem 1rem;
+    }
+    [data-testid="stMetricLabel"] {
+        font-size: 0.8rem !important;
+        color: #64748b !important;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+    }
+    [data-testid="stMetricValue"] {
+        font-weight: 700 !important;
+        color: #0f172a !important;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+st.markdown(
+    """
+    <div class="da-hero">
+      <h1>Deck Auditor</h1>
+      <p>Audits PowerPoint decks for narrative quality, AI voice, density, and clarity.</p>
+    </div>
+    <hr class="da-divider" />
+    """,
+    unsafe_allow_html=True,
+)
 
 
 # ---------------------------------------------------------------------------
